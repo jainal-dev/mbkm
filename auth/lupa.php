@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
 
     // Check if the email exists in the database
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
 
@@ -27,24 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Generate a unique token
         $token = bin2hex(random_bytes(50));
 
-        // Save the token in the database with an expiration time (e.g., 1 hour)
-        $stmt = $pdo->prepare("UPDATE users SET reset_token = :token, token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE email = :email");
+        // Save the token in the database with an expiration time (e.g., 10 minutes)
+        $stmt = $pdo->prepare("UPDATE user SET reset_token = :token, token_expiry = DATE_ADD(NOW(), INTERVAL 10 MINUTE) WHERE email = :email");
         $stmt->execute(['token' => $token, 'email' => $email]);
 
-        // Create reset link
-        $reset_link = "http://yourdomain.com/reset_password.php?token=$token";
+        $success = "Token untuk mereset kata sandi telah berhasil dibuat.";
 
-        // Send the email
-        $to = $email;
-        $subject = "Password Reset Request";
-        $message = "Hi, click the following link to reset your password: $reset_link";
-        $headers = "From: no-reply@yourdomain.com";
-
-        if (mail($to, $subject, $message, $headers)) {
-            $success = "Link untuk mereset kata sandi telah dikirim ke email Anda.";
-        } else {
-            $error = "Gagal mengirim email. Silakan coba lagi.";
-        }
+        // Redirect to the verification page with the token as a query parameter
+        header('Location: verifikasi-code.php?email=' . urlencode($email) . '&token=' . urlencode($token));
+        exit; // Ensure the script stops executing after redirect
     } else {
         $error = "Email tidak ditemukan.";
     }
@@ -69,12 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             animation: moveBackground 15s linear infinite;
         }
     </style>
+    <title>Lupa Password</title>
 </head>
 <body class="moving-background flex items-center justify-center min-h-screen">
     <div class="flex w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden p-10">
         <div class="w-full flex flex-col items-center justify-center">
             <h2 class="text-4xl font-bold text-indigo-900 mb-6">Lupa Kata Sandi</h2>
-            <p class="text-gray-500 mb-4 text-center">Masukkan email Anda, kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda.</p>
+            <p class="text-gray-500 mb-4 text-center">Masukkan email Anda, kami akan membuat token untuk mengatur ulang kata sandi Anda.</p>
             
             <?php if($error != ''): ?>
                 <div class="mb-4 text-red-500">
@@ -93,11 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block text-gray-700 mb-2" for="email">Email</label>
                     <input class="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" id="email" name="email" type="email" placeholder="Masukkan email Anda" required/>
                 </div>
-                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300">Kirim Tautan</button>
+                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300">Kirim Token</button>
             </form>
 
             <div class="text-center mt-6">
-                <a href="frontend.php" class="bg-gray-400 text-white p-3 rounded-lg font-semibold hover:bg-gray-500 transition duration-300 inline-block">
+                <a href="../index.php" class="bg-red-400 text-white p-3 rounded-lg font-semibold hover:bg-white-500 transition duration-300 inline-block">
                     Kembali Ke Halaman Utama
                 </a>
             </div>

@@ -2,7 +2,6 @@
 session_start();
 $error = '';
 
-
 $host = 'localhost'; 
 $dbname = 'mbkm'; 
 $username = 'root'; 
@@ -31,12 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         echo "<script>
-                alert('localhost says: Username atau kata sandi salah.');
-                window.location.href = 'login.php'; // Redirect kembali ke halaman login
+                alert('Username atau kata sandi salah.');
+                window.location.href = 'login.php'; 
               </script>";
         exit(); 
     }
-    
 }
 ?>
 
@@ -99,16 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .transition {
             transition: all 0.3s ease;
         }
-      /* Style tambahan untuk memastikan tampilan sesuai */
-    .cursor-pointer {
-        cursor: pointer;
-    }
-    .inline-block {
-        margin-right: 100px; /* Memberi jarak antar elemen */
-    }
-    .text-center {
-        text-align: center;
-    }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
@@ -124,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p class="text-lg text-yellow-500">INDONESIA JAYA</p>
             </div>
         </div>
+
         <div class="w-1/2 bg-gradient-to-r from-purple-500 to-blue-500 p-10 flex flex-col justify-center animate-fade-in">
             <div class="flex items-center mb-6">
                 <a href="frontend.php" class="text-white text-2xl mr-4 hover-animate">
@@ -149,16 +138,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300">Masuk</button>
             </form>
-            <div class="text-center">
-                <span class="text-blue-400 font-semibold inline-block hover:text-blue-500 transition duration-300 cursor-pointer">
-                    <a href="../auth/register.php">Belum punya akun? Daftar</a>
+            <div class="text-center mt-6">
+                <!-- Daftar (Register) link in blue -->
+                <span class="text-blue-100 font-semibold inline-block hover:text-blue-500 transition duration-300 cursor-pointer">
+                    <a href="../auth/register.php"><span class="text-white">Belum punya akun?</span> Daftar</a>
                 </span>
-                <span class="text-red-400 font-semibold inline-block hover:text-red-500 transition duration-300 cursor-pointer">
-                    <a href="../auth/lupa.php">Lupa Password?</a>
+                <!-- Lupa Password? link in red -->
+                <div>
+                <span class="text-red-400 font-semibold inline-block hover:text-red-500 transition duration-300 cursor-pointer ml-4">
+                    <a href="../auth/lupa.php">Lupa Kata Sandi?</a>
                 </span>
+                </div>
             </div>
         </div>
     </div>
+
     <script>
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#password');

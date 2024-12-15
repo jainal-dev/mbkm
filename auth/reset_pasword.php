@@ -20,7 +20,7 @@ if (isset($_GET['token'])) {
     $token = $_GET['token'];
 
     // Ambil data pengguna berdasarkan token
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE reset_token = :token AND token_expiry > NOW()");
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE reset_token = :token AND token_expiry > NOW()");
     $stmt->execute(['token' => $token]);
     $user = $stmt->fetch();
 

@@ -113,6 +113,10 @@
 
             .about-us, .pbl {
                 font-size: 1rem;
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
             }
         }
     </style>
@@ -128,12 +132,12 @@
             <p>Merdeka Belajar Kampus Merdeka</p>
 
             <div class="buttons">
-                <button class="button" href="./auth/register.php">
+                <a href="./auth/register.php" class="button">
                     Daftar
-                </button>
-                <button class="button white"href="./auth/login.php">
+                </a>
+                <a href="./auth/login.php" class="button white">
                     Masuk
-                </button>
+                </a>
             </div>
         </div>
     </div>
