@@ -99,6 +99,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .transition {
             transition: all 0.3s ease;
         }
+      /* Style tambahan untuk memastikan tampilan sesuai */
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    .inline-block {
+        margin-right: 100px; /* Memberi jarak antar elemen */
+    }
+    .text-center {
+        text-align: center;
+    }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
@@ -108,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class="fas fa-graduation-cap text-2xl text-indigo-900"></i>
                 <span class="ml-2 text-indigo-900 font-semibold">PBLTRPL-117</span>
             </div>
-            <img alt="Silam Image" src="./img/formulir.png" class="mb-4" height="200" width="300"/>
+            <img alt="Silam Image" src="../img/formulir.png" class="mb-4" height="200" width="300"/>
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-blue-900">Kampus Merdeka</h1>
                 <p class="text-lg text-yellow-500">INDONESIA JAYA</p>
@@ -121,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </a>
                 <h2 class="text-4xl font-bold text-white">Masuk Akun Anda!</h2>
             </div>
-            <p class="text-white mb-6">Silakan masukkan detail akun Anda</p>
+            <p class="text-white mb-6">Silakan masukkan username dan kata sandi anda</p>
             <?php if ($error != ''): ?>
                 <div class="mb-4 text-red-500">
                     <?php echo $error; ?>
@@ -139,18 +149,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300">Masuk</button>
             </form>
-            <div class="flex justify-center space-x-6 mt-6">
-    <!-- Belum Punya Akun? Daftar -->
-    <a href="register.php" class="bg-yellow-400 text-white p-3 rounded-lg font-semibold hover:bg-yellow-500 transition duration-300 inline-block">
-        Belum punya akun? Daftar
-    </a>
-
-    <!-- Lupa Password? -->
-    <a href="lupa.php" class="bg-red-400 text-white p-3 rounded-lg font-semibold hover:bg-red-500 transition duration-300 inline-block">
-        Lupa Password?
-    </a>
-</div>
-
+            <div class="text-center">
+                <span class="text-blue-400 font-semibold inline-block hover:text-blue-500 transition duration-300 cursor-pointer">
+                    <a href="../auth/register.php">Belum punya akun? Daftar</a>
+                </span>
+                <span class="text-red-400 font-semibold inline-block hover:text-red-500 transition duration-300 cursor-pointer">
+                    <a href="../auth/lupa.php">Lupa Password?</a>
+                </span>
+            </div>
         </div>
     </div>
     <script>

@@ -2,317 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Pengajuan Usulan MBKM</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+    <title>PBL TRPL-117</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Poppins', sans-serif;
-            background-color: #F0F8FF;
-            overflow-x: hidden;
+            background-image: url('latar halaman.webp');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        /* Animasi Fade-in Saat Halaman Dimuat */
-        .fade-in {
-            opacity: 0;
-            animation: fadeInAnimation ease 1.5s;
-            animation-fill-mode: forwards;
-        }
-
-        @keyframes fadeInAnimation {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* Header Section */
         .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-            background-color: #00C6FF;
-            background-image: linear-gradient(90deg, #00C6FF 0%, #0072ff 100%);
-            color: white;
-            z-index: 1;
+            text-align: left;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 1200px;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
+        .text h1 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
 
-        .logo span {
-            font-size: 24px;
-            font-weight: 700;
+        .text h2 {
+            font-size: 4.0rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            text-align: left;
         }
 
-        .nav {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .nav a:hover {
-            background-color: #0072ff;
-            box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
-        }
-
-        /* Main Section */
-        .content {
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 50px 30px; 
-            background: linear-gradient(90deg, #B2F9FC 0%, #EAFFFD 100%);
-            min-height: auto;
-        }
-
-        .text-content {
-            text-align: left; 
-        }
-
-        .text-content h1 {
-            font-size: 32px;
-            color: #2C3E50;
-            margin-bottom: 15px; 
-            animation: slideInLeft 1.5s ease-out;
-        }
-
-        .text-content p {
-            font-size: 16px;
-            color: #2C3E50;
-            margin-bottom: 20px; 
+        .text p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-align: left;
         }
 
         .buttons {
             display: flex;
-            justify-content: flex-start; 
-            align-items: center;
+            gap: 20px;
         }
 
-        .buttons a {
-            text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            margin-right: 10px; 
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
-        }
-
-        .buttons a.daftar {
-            background-color: #00AEEF;
+        .button {
+            font-family: 'Poppins', sans-serif;
+            padding: 5px 35px;
+            border: none;
+            background-color: #2d87f0;
             color: white;
-        }
-
-        .buttons a.login {
-            background-color: #ffffff;
-            color: #2C3E50;
-            border: 2px solid #00AEEF;
-        }
-
-        .buttons a:hover {
-            transform: translateY(-5px);
-        }
-
-
-        .about-section {
-            padding: 50px 30px;
-            background-color: #E0F7FA;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .about-image {
-            flex: 1;
-            margin-right: 20px;
-        }
-
-
-        .about-image img {
-            max-width: 82%; 
-            height: auto;
+            font-size: 0.9rem;
             border-radius: 10px;
-            transition: transform 0.5s;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .about-image img:hover {
-            transform: scale(1.05);
+        .button:hover {
+            background-color: #1a5bb8;
         }
 
-        .about-content {
-            flex: 1;
-            text-align: left; 
+        .button.white {
+            background-color: white;
+            color: #000000;
         }
 
-        .about-content h2 {
-            font-size: 28px;
-            color: #2C3E50;
-            margin-bottom: 10px;
+        .about-us, .pbl {
+            position: absolute;
+            top: 20px;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
         }
 
-        .about-content p {
-            font-size: 14px;
-            color: #2C3E50;
+        .pbl {
+            left: 20px;
         }
 
-
-.features-section {
-    padding: 50px 30px;
-    display: flex;
-    justify-content: space-between; 
-    background-color: #ffffff;
-}
-
-    .feature-box {
-    text-align: center;
-    max-width: 28%;
-    transition: transform 0.3s;
-    }
-
-    .feature-box:hover {
-    transform: translateY(-10px);
-    }
-
-    .feature-box img {
-    width: 450px;
-    height: 250px;
-    margin-bottom: 10px;
-    }
-
-    .feature-box h3 {
-    font-size: 20px;
-    color: #2C3E50;
-    margin-bottom: 8px;
-    }
-
-    .feature-box p {
-    font-size: 14px;
-    color: #2C3E50;
-    }
-
-
-        /* Footer Section */
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #E0F7FA;
-            font-size: 12px;
-            color: #2C3E50;
+        .about-us {
+            right: 20px;
         }
 
-        @keyframes slideInLeft {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-                padding: 15px;
+            .container {
+                width: 90%;
+                padding: 20px;
             }
-            .about-section, .features-section {
-                flex-direction: column;
-                align-items: flex-start; /* Konten tetap di kiri */
-                padding: 15px;
+
+            .text h1 {
+                font-weight: bold;
+                font-size: 1.5rem;
             }
-            .about-image, .about-content, .feature-box {
-                margin: 0;
+
+            .text h2 {
+                font-size: 2rem;
+            }
+
+            .about-us, .pbl {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
-<body class="fade-in">
-    <!-- Header Section -->
-    <div class="container">
-        <div class="logo">
-            <span>PBLTRPL-117</span>
-        </div>
-        <div class="nav">
-            <a href="#about-section">Tentang Kami</a>
-            <a href="#">Fitur</a>
-        </div>
-    </div>
+<body>
 
-    <!-- Main Section -->
-    <div class="content">
-        <div class="text-content">
-            <h1>Aplikasi Pengajuan Usulan MBKM</h1>
+    <a href="#" class="about-us">Tentang Kami</a>
+    <a href="#" class="pbl">PBL TRPL-117</a>
+
+    <div class="container">
+        <div class="text">
+            <h2>Aplikasi Pengajuan <br> Usulan MBKM</h2>
             <p>Merdeka Belajar Kampus Merdeka</p>
+
             <div class="buttons">
-                <a class="daftar" href="./auth/daftar.php">Daftar</a>
-                <a class="login" href="./auth/login.php">Login</a>
+                <button class="button" href="./auth/register.php">
+                    Daftar
+                </button>
+                <button class="button white"href="./auth/login.php">
+                    Masuk
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- About Us Section -->
-    <div id="about-section" class="about-section">
-        <div class="about-image">
-            <img src="./img/about.png" alt="About Us Image">
-        </div>
-        <div class="about-content">
-            <h1>Tentang Kami</h2>
-            <h3>
-                Aplikasi ini dirancang untuk memfasilitasi pengajuan usulan Merdeka Belajar Kampus Merdeka (MBKM) oleh mahasiswa, sehingga proses pengajuan menjadi lebih mudah dan efisien.
-                Dengan antarmuka yang ramah pengguna, aplikasi ini memungkinkan mahasiswa mengirimkan usulan program studi atau kegiatan MBKM dengan cepat dan transparan.
-    </h3>
-        </div>
-    </div>
-
-    <!-- Features Section -->
-    <div class="features-section">
-        <div class="feature-box">
-            <img src="./img/ilustrasi.jpg" alt="Feature 1">
-            <h3>Pengajuan Usulan</h3>
-            <p>Ajukan usulan program MBKM dengan mudah melalui aplikasi ini.</p>
-        </div>
-        <div class="feature-box">
-            <img src="./img/kuliah.jpg" alt="Feature 2">
-            <h3>Monitoring Proses</h3>
-            <p>Pantau status usulan Anda secara real-time di aplikasi ini.</p>
-        </div>
-        <div class="feature-box">
-            <img src="./img/kkn1.png" alt="Feature 3">
-            <h3>Laporan Kegiatan</h3>
-            <p>Lengkapi laporan kegiatan MBKM dan submit langsung melalui aplikasi ini.</p>
-        </div>
-    </div>
-    
-
-    <!-- Footer Section -->
-    <div class="footer">
-        <p>Copyright 2024 By Tim PBL-117 TRPL 1-A Malam</p>
-    </div>
-
-    <!-- Smooth Scroll Script -->
-    <script>
-        function scrollToSection(event, sectionId) {
-            event.preventDefault();
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    </script>
 </body>
 </html>
