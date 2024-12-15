@@ -1,0 +1,54 @@
+<style>
+  .dropdown-secodary-dropdown-toggle {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  
+}
+
+.dropdown-show{
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {background-color: #f1f1f1;}
+
+.dropdown-show:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-show:hover .btn-secondary-dropdown-toggle {
+  background-color: #3e8e41;
+}
+</style>
+<div class="dropdown-show" style="float:right;">
+    <a class="btn-secondary-dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown link
+    </a>
+  
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div>

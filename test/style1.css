@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root{
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+    --blue2: #39318f;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    color: var(--white);
+}
+
+body{
+    min-height: 100vh;
+    min-height: 100dvh;
+        display: grid;
+        grid-template-rows: auto 1fr;
+}
+
+#sidebar{
+    box-sizing: border-box;
+    height: 100vh;
+    width: 250px;
+    padding: 5px 1em;
+    background-color: var(--blue);
+    border-right: 1px solid var(--white);
+
+    position: sticky;
+    top: 0;
+    align-self: start;
+    transition: 300ms ease-in-out;
+    overflow: hidden;
+    text-wrap: nowrap;
+}
+
+#sidebar.close{
+    padding: 5px;
+    width: 60px;
+
+}
+
+#sidebar ul{
+    list-style: none;
+}
+
+#sidebar > ul > li:first-child{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+    .logo {
+        font-weight: 600; 
+    }
+}
+
+#sidebar ul li.active a{
+    color: var(--white);
+
+    svg{
+        fill: var(--white);
+    }
+}
+
+#sidebar a, #sidebar .dropdown-menu, #sidebar .logo{
+    border-radius: .5em;
+    padding: .85em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.dropdown-menu{
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+#sidebar.svg{
+    flex-shrink: 0;
+    fill: var(--white);
+}
+
+#sidebar a span, #sidebar.dropdown-menu span{
+    flex-grow: 1em;
+}
+
+#sidebar a:hover, #sidebar .dropdown-menu:hover{
+    background-color: var(--blue2) ;
+}
+
+#sidebar .sub-menu{
+    display: grid;
+    transition: 300ms ease-in-out;
+    grid-template-rows: 0fr;
+    > div{
+        overflow: hidden;
+    }
+}
+
+#sidebar .sub-menu.show {
+    grid-template-rows: 1fr;
+}
+
+.dropdown-menu svg{
+    transition: 200ms ease-in-out;
+}
+
+.rotate svg:last-child{
+    rotate: 180deg;
+}
+
+#sidebar .sub-menu a{
+    padding-left: 2em;
+}
+
+#toggle-btn{
+    margin-left: auto;
+    padding: 1em;
+    border: none;
+    border-radius: .5em;
+    background: none;
+    cursor: pointer;
+
+    svg{
+        transition: rotate 150em ease;
+    }
+}
+
+#toggle-btn:hover{
+    background-color: var(--blue2);
+}

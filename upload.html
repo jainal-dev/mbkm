@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .upload-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .file-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .file-preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .file-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .file-preview-item .remove-file {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255,0,0,0.7);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upload-container">
+            <h2 class="text-center mb-4">Upload File</h2>
+            <form id="uploadForm" action="file.php" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="fileInput" class="form-label">Pilih File (PNG, JPG, PDF)</label>
+                    <input class="form-control" type="file" id="fileInput" name="files[]" multiple accept=".png,.jpg,.jpeg,.pdf">
+                    <div class="form-text text-muted">Maksimal ukuran file 5MB</div>
+                </div>
+                <div id="filePreview" class="file-preview"></div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Upload File</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = ''; // Clear previous previews
+
+            const files = event.target.files;
+            const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+
+            for (let file of files) {
+                // Validasi tipe file dan ukuran
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Hanya file PNG, JPG, dan PDF yang diperbolehkan!');
+                    event.target.value = ''; // Reset input
+                    return;
+                }
+
+                if (file.size > maxSize) {
+                    alert('Ukuran file maksimal 5MB!');
+                    event.target.value = ''; // Reset input
+                    return;
+                }
+
+                const filePreviewItem = document.createElement('div');
+                filePreviewItem.className = 'file-preview-item';
+
+                const removeBtn = document.createElement('div');
+                removeBtn.className = 'remove-file';
+                removeBtn.innerHTML = '&times;';
+                removeBtn.onclick = () => {
+                    filePreviewItem.remove();
+                    // Update file input
+                    const dataTransfer = new DataTransfer();
+                    Array.from(files).forEach(f => {
+                        if (f !== file) dataTransfer.items.add(f);
+                    });
+                    event.target.files = dataTransfer.files;
+                };
+
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.file = file;
+                    filePreviewItem.appendChild(img);
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => { img.src = e.target.result; };
+                    reader.readAsDataURL(file);
+                } else {
+                    const pdfIcon = document.createElement('div');
+                    pdfIcon.innerHTML = 'PDF';
+                    pdfIcon.style.display = 'flex';
+                    pdfIcon.style.alignItems = 'center';
+                    pdfIcon.style.justifyContent = 'center';
+                    pdfIcon.style.height = '100%';
+                    pdfIcon.style.backgroundColor = '#f44336';
+                    pdfIcon.style.color = 'white';
+                    filePreviewItem.appendChild(pdfIcon);
+                }
+
+                filePreviewItem.appendChild(removeBtn);
+                filePreview.appendChild(filePreviewItem);
+            }
+        });
+    </script>
+</body>
+</html>
