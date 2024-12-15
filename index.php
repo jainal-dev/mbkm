@@ -260,8 +260,8 @@
             <h1>Aplikasi Pengajuan Usulan MBKM</h1>
             <p>Merdeka Belajar Kampus Merdeka</p>
             <div class="buttons">
-                <a class="daftar" href="daftar.php">Daftar</a>
-                <a class="login" href="login.php">Login</a>
+                <a class="daftar" href="./auth/daftar.php">Daftar</a>
+                <a class="login" href="./auth/login.php">Login</a>
             </div>
         </div>
     </div>
@@ -269,7 +269,7 @@
     <!-- About Us Section -->
     <div id="about-section" class="about-section">
         <div class="about-image">
-            <img src="about.png" alt="About Us Image">
+            <img src="./img/about.png" alt="About Us Image">
         </div>
         <div class="about-content">
             <h1>Tentang Kami</h2>
@@ -283,17 +283,17 @@
     <!-- Features Section -->
     <div class="features-section">
         <div class="feature-box">
-            <img src="ilustrasi.jpg" alt="Feature 1">
+            <img src="./img/ilustrasi.jpg" alt="Feature 1">
             <h3>Pengajuan Usulan</h3>
             <p>Ajukan usulan program MBKM dengan mudah melalui aplikasi ini.</p>
         </div>
         <div class="feature-box">
-            <img src="kuliah.jpg" alt="Feature 2">
+            <img src="./img/kuliah.jpg" alt="Feature 2">
             <h3>Monitoring Proses</h3>
             <p>Pantau status usulan Anda secara real-time di aplikasi ini.</p>
         </div>
         <div class="feature-box">
-            <img src="kkn1.png" alt="Feature 3">
+            <img src="./img/kkn1.png" alt="Feature 3">
             <h3>Laporan Kegiatan</h3>
             <p>Lengkapi laporan kegiatan MBKM dan submit langsung melalui aplikasi ini.</p>
         </div>

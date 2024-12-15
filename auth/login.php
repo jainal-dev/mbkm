@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class="fas fa-graduation-cap text-2xl text-indigo-900"></i>
                 <span class="ml-2 text-indigo-900 font-semibold">PBLTRPL-117</span>
             </div>
-            <img alt="Silam Image" src="formulir.png" class="mb-4" height="200" width="300"/>
+            <img alt="Silam Image" src="./img/formulir.png" class="mb-4" height="200" width="300"/>
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-blue-900">Kampus Merdeka</h1>
                 <p class="text-lg text-yellow-500">INDONESIA JAYA</p>
