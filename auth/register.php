@@ -17,7 +17,7 @@ try {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'] ?? '';
-    $nim_nip = $_POST['nim_nip'] ?? '';
+    $nim = $_POST['nim'] ?? '';
     $password = $_POST['password'] ?? '';
     $nama = $_POST['nama'] ?? '';
     $id_prodi = $_POST['id_prodi'] ?? '';
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? '';
 
     // Cek apakah username sudah ada
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE username = :username");
     $stmt->execute(['username' => $username]);
     $user = $stmt->fetch();
 
@@ -33,12 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Username sudah terdaftar.";
     } else {
         // Masukkan pengguna baru ke database
-        $stmt = $pdo->prepare("INSERT INTO users (username, password, nim_nip, id_prodi, nama, role, email) 
-                               VALUES (:username, :password, :nim_nip, :id_prodi, :nama, :role, :email)");
+        $stmt = $pdo->prepare("INSERT INTO user (username, password, nim, id_prodi, nama, role, email) 
+                               VALUES (:username, :password, :nim, :id_prodi, :nama, :role, :email)");
         $stmt->execute([
             'username' => $username,
             'password' => password_hash($password, PASSWORD_DEFAULT),
-            'nim_nip' => $nim_nip,
+            'nim' => $nim,
             'id_prodi' => $id_prodi,
             'nama' => $nama,
             'role' => $role,
@@ -112,7 +112,7 @@ $prodi_list = $prodi_stmt->fetchAll();
                 <i class="fas fa-graduation-cap text-2xl text-indigo-900"></i>
                 <span class="ml-2 text-indigo-900 font-semibold">PBLTRPL-117</span>
             </div>
-            <img alt="Silam Image" src="formulir.png" class="mb-4" height="200" width="300"/>
+            <img alt="Silam Image" src="../img/formulir.png" class="mb-4" height="200" width="300"/>
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-blue-900">Kampus Merdeka</h1>
                 <p class="text-lg text-yellow-500">INDONESIA JAYA</p>
@@ -136,8 +136,8 @@ $prodi_list = $prodi_stmt->fetchAll();
         <input class="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" id="email" name="email" type="email" placeholder="Masukkan Email Anda" required/>
     </div>
     <div class="mb-4">
-        <label class="block text-white mb-2" for="nim_nip">NIM/NIP</label>
-        <input class="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" id="nim_nip" name="nim_nip" type="text" placeholder="Masukkan NIM/NIP Anda" required/>
+        <label class="block text-white mb-2" for="nim">NIM</label>
+        <input class="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" id="nim" name="nim" type="text" placeholder="Masukkan NIM Anda" required/>
     </div>
     <div class="mb-4">
         <label class="block text-white mb-2" for="id_prodi">Program Studi</label>

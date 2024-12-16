@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $token = bin2hex(random_bytes(50));
 
         // Save the token in the database with an expiration time (e.g., 10 minutes)
-        $stmt = $pdo->prepare("UPDATE user SET reset_token = :token, token_expiry = DATE_ADD(NOW(), INTERVAL 10 MINUTE) WHERE email = :email");
-        $stmt->execute(['token' => $token, 'email' => $email]);
+        $stmt = $pdo->prepare("UPDATE user SET reset_kode = :kode, kode_expiry = DATE_ADD(NOW(), INTERVAL 10 MINUTE) WHERE email = :email");
+        $stmt->execute(['kode' => $token, 'email' => $email]);
 
-        $success = "Token untuk mereset kata sandi telah berhasil dibuat.";
+        $success = "";
 
         // Redirect to the verification page with the token as a query parameter
-        header('Location: verifikasi-code.php?email=' . urlencode($email) . '&token=' . urlencode($token));
+        header('Location: verifikasi-code.php?email=' . urlencode($email) . '&kode=' . urlencode($token));
         exit; // Ensure the script stops executing after redirect
     } else {
         $error = "Email tidak ditemukan.";
@@ -80,17 +80,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="">
+            <form method="post" action="verifikasi.php">
                 <div class="mb-4 w-full">
                     <label class="block text-gray-700 mb-2" for="email">Email</label>
                     <input class="w-full p-3 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" id="email" name="email" type="email" placeholder="Masukkan email Anda" required/>
                 </div>
-                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300">Kirim Token</button>
+                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300">Kirim Kode</button>
             </form>
 
             <div class="text-center mt-6">
-                <a href="../index.php" class="bg-red-400 text-white p-3 rounded-lg font-semibold hover:bg-white-500 transition duration-300 inline-block">
-                    Kembali Ke Halaman Utama
+                <a href="../auth/login.php" class="bg-red-400 text-white p-3 rounded-lg font-semibold hover:bg-white-500 transition duration-300 inline-block">
+                    Kembali
                 </a>
             </div>
         </div>

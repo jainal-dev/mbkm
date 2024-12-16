@@ -22,11 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
+        // Simpan username dan role di session
         $_SESSION['username'] = $user['username'];
-        echo "<script>
-                alert('Login berhasil!');
-                window.location.href = 'ds.php'; 
-              </script>";
+        $_SESSION['role'] = $user['role'];  // Simpan role di session
+
+        // Arahkan ke dashboard sesuai role
+        if ($user['role'] == 'mahasiswa') {
+            header('Location: ../dashboard/mahasiswa/dashboard_mahasiswa.php');
+        } elseif ($user['role'] == 'dosen') {
+            header('Location: ../dashboard/dosen/dashboard_dosen.php');
+        } elseif ($user['role'] == 'admin') {
+            header('Location: ../dashboard/admin/dashboard_admin.php');
+        }
         exit();
     } else {
         echo "<script>
@@ -37,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
